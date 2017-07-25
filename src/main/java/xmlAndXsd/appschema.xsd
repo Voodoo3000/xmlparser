@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="applianceslist">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="fridge">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="HouseholdElectronic">
+                                <xs:sequence>
+                                    <xs:element name="capacity" type="xs:int"/>
+                                </xs:sequence>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="pc">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="HouseholdElectronic">
+                                <xs:sequence>
+                                    <xs:element name="cpuGhz" type="xs:int"/>
+                                    <xs:element name="gpu" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="router">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="HouseholdElectronic">
+                                <xs:sequence>
+                                    <xs:element name="linkSpeed" type="xs:int"/>
+                                    <xs:element name="vlanfeature" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="tv">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="HouseholdElectronic">
+                                <xs:sequence>
+                                    <xs:element name="diagSize" type="xs:int"/>
+                                    <xs:element name="dispResol" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="HouseholdElectronic">
+        <xs:sequence>
+            <xs:element name="modelName" type="xs:string"/>
+            <xs:element name="power" type="xs:double"/>
+            <xs:element name="onOff" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
