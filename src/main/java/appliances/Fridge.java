@@ -9,6 +9,10 @@ public class Fridge extends HouseHoldElectronics {
 
     private int capacity;
 
+    public Fridge(String modelName, double power, boolean onOff, int capacity) {
+        this.capacity = capacity;
+    }
+
     @Override
     public String toString() {
         return "Fridge{" +

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<applianceslist
+<appliancelist
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation= "appschema.xsd">
-
     <fridge>
         <modelName>Bosch KDD74AL20N</modelName>
         <power>150</power>
         <onOff>false</onOff>
         <capacity>560</capacity>
     </fridge>
-
     <pc>
         <modelName>ROG G20CB</modelName>
         <power>500</power>
@@ -18,15 +15,13 @@
         <cpuGhz>4</cpuGhz>
         <gpu>GTX1080 8Gb</gpu>
     </pc>
-
     <router>
         <modelName>HP R120</modelName>
         <power>50</power>
         <onOff>true</onOff>
         <linkSpeed>1300</linkSpeed>
-        <vlanfeature>4 VLAN</vlanfeature>
+        <vlanFeature>4 VLAN</vlanFeature>
     </router>
-
     <tv>
         <modelName>Sony XE94</modelName>
         <power>240</power>
@@ -34,5 +29,4 @@
         <diagSize>75</diagSize>
         <dispResol>4K HDR</dispResol>
     </tv>
-
-</applianceslist>
+</appliancelist>

@@ -10,6 +10,11 @@ public class PC extends HouseHoldElectronics {
     private int cpuGhz;
     private String gpu;
 
+    public PC(String modelName, double power, boolean onOff, int cpuGhz, String gpu) {
+        this.cpuGhz = cpuGhz;
+        this.gpu = gpu;
+    }
+
     @Override
     public String toString() {
         return "Desktop computer " +
