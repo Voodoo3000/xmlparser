@@ -6,7 +6,7 @@
                 <xs:element name="fridge">
                     <xs:complexType>
                         <xs:complexContent>
-                            <xs:extension base="HouseholdElectronic">
+                            <xs:extension base="HouseHoldElectronic">
                                 <xs:sequence>
                                     <xs:element name="capacity" type="xs:int"/>
                                 </xs:sequence>
@@ -18,7 +18,7 @@
                 <xs:element name="pc">
                     <xs:complexType>
                         <xs:complexContent>
-                            <xs:extension base="HouseholdElectronic">
+                            <xs:extension base="HouseHoldElectronic">
                                 <xs:sequence>
                                     <xs:element name="cpuGhz" type="xs:int"/>
                                     <xs:element name="gpu" type="xs:string"/>
@@ -31,7 +31,7 @@
                 <xs:element name="router">
                     <xs:complexType>
                         <xs:complexContent>
-                            <xs:extension base="HouseholdElectronic">
+                            <xs:extension base="HouseHoldElectronic">
                                 <xs:sequence>
                                     <xs:element name="linkSpeed" type="xs:int"/>
                                     <xs:element name="vlanFeature" type="xs:string"/>
@@ -44,7 +44,7 @@
                 <xs:element name="tv">
                     <xs:complexType>
                         <xs:complexContent>
-                            <xs:extension base="HouseholdElectronic">
+                            <xs:extension base="HouseHoldElectronic">
                                 <xs:sequence>
                                     <xs:element name="diagSize" type="xs:int"/>
                                     <xs:element name="dispResol" type="xs:string"/>
@@ -57,7 +57,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="HouseholdElectronic">
+    <xs:complexType name="HouseHoldElectronic">
         <xs:sequence>
             <xs:element name="modelName" type="xs:string"/>
             <xs:element name="power" type="xs:double"/>

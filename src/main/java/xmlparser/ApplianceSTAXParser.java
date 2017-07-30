@@ -4,22 +4,20 @@ import appliances.Fridge;
 import appliances.PC;
 import appliances.Router;
 import appliances.TV;
-import org.xml.sax.Attributes;
 import electronics.ApplianceList;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
-import java.io.IOException;
-
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
- * Created by VladislavYTsa on 26.07.2017.
+ * Created by Voodoo3000 on 30.07.2017.
  */
-public class ApplianceSAXParser extends DefaultHandler {
+public class ApplianceSTAXParser {
     private static final String APPLIANCELIST = "appliancelist";
     private static final String FRIDGE = "fridge";
     private static final String PC = "pc";
@@ -48,74 +46,84 @@ public class ApplianceSAXParser extends DefaultHandler {
     private String dispResol = "";
 
     private ApplianceList appliance;
-    private String element;
+    private String element = "";
 
-    public ApplianceList xmlSAXParsing(String xmlDir) {
-
+    public ApplianceList xmlSTAXParsing(String xmlDir) {
+        XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         try {
-            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-            SAXParser parser = parserFactory.newSAXParser();
-            parser.parse(new File(xmlDir), this);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            InputStream inputfile = new FileInputStream(xmlDir);
+            XMLStreamReader reader = inputFactory.createXMLStreamReader(inputfile);
+            process(reader);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (XMLStreamException ex) {
+            ex.printStackTrace();
         }
-
         return appliance;
     }
 
-    @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        this.element = qName;
-        if (this.element.equals(APPLIANCELIST)) {
-            appliance = new ApplianceList();
-        }
-    }
-
-    @Override
-    public void characters(char[] ch, int start, int length) throws SAXException {
-        if (!String.valueOf(ch, start, length).trim().equals("")) {
-            switch (element) {
-                case MODELNAME:
-                    this.modelName = String.valueOf(ch, start, length);
+    private void process(XMLStreamReader reader) throws XMLStreamException {
+        while (reader.hasNext()) {
+            int type = reader.next();
+            switch (type) {
+                case XMLStreamConstants.START_ELEMENT:
+                    element = reader.getLocalName();
+                    if (this.element.equals(APPLIANCELIST)) {
+                        appliance = new ApplianceList();
+                    }
                     break;
-                case POWER:
-                    this.power = Integer.parseInt(String.valueOf(ch, start, length));
+                case XMLStreamConstants.END_ELEMENT:
+                    addAppliance(reader.getLocalName());
                     break;
-                case ONOFF:
-                    this.onOff = Boolean.parseBoolean(String.valueOf(ch, start, length));
-                    break;
-                case CAPACITY:
-                    this.capacity = Integer.parseInt(String.valueOf(ch, start, length));
-                    break;
-                case CPUGHZ:
-                    this.cpuGhz = Integer.parseInt(String.valueOf(ch, start, length));
-                    break;
-                case GPU:
-                    this.gpu = String.valueOf(ch, start, length);
-                    break;
-                case LINKSPEED:
-                    this.linkSpeed = Integer.parseInt(String.valueOf(ch, start, length));
-                    break;
-                case VLANFEATURE:
-                    this.vlanFeature = String.valueOf(ch, start, length);
-                    break;
-                case DIAGSIZE:
-                    this.diagSize = Integer.parseInt(String.valueOf(ch, start, length));
-                    break;
-                case DISPRESOL:
-                    this.dispResol = String.valueOf(ch, start, length);
+                case XMLStreamConstants.CHARACTERS:
+                    getField(element, reader);
                     break;
             }
         }
     }
 
-    @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
-        switch (qName) {
+    private void getField(String element, XMLStreamReader reader) {
+        if (reader.getText().trim().equals("")) {
+            switch (element) {
+                case MODELNAME:
+                    this.modelName = reader.getText();
+                    break;
+                case POWER:
+                    this.power = Integer.parseInt(reader.getText());
+                    break;
+                case ONOFF:
+                    this.onOff = Boolean.parseBoolean(reader.getText());
+                    break;
+                case CAPACITY:
+                    this.capacity = Integer.parseInt(reader.getText());
+                    break;
+                case CPUGHZ:
+                    this.cpuGhz = Integer.parseInt(reader.getText());
+                    break;
+                case GPU:
+                    this.gpu = reader.getText();
+                    break;
+                case LINKSPEED:
+                    this.linkSpeed = Integer.parseInt(reader.getText());
+                    break;
+                case VLANFEATURE:
+                    this.vlanFeature = reader.getText();
+                    break;
+                case DIAGSIZE:
+                    this.diagSize = Integer.parseInt(reader.getText());
+                    break;
+                case DISPRESOL:
+                    this.dispResol = reader.getText();
+                    break;
+
+
+            }
+        }
+    }
+
+    private void addAppliance(String name) {
+
+        switch (name) {
             case FRIDGE:
                 this.appliance.getAs().add(new Fridge(modelName, power, onOff, capacity));
                 break;
@@ -131,7 +139,7 @@ public class ApplianceSAXParser extends DefaultHandler {
         }
     }
 
-    public ApplianceList getApplianceList() {
+    public ApplianceList getAppliance() {
         return appliance;
     }
 }

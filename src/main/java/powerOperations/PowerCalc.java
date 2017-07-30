@@ -1,7 +1,7 @@
 package powerOperations;
 
 import electronics.ApplianceList;
-import electronics.HouseHoldElectronics;
+import electronics.HouseHoldElectronic;
 
 /**
  * Created by Voodoo3000 on 25.07.2017.
@@ -9,7 +9,7 @@ import electronics.HouseHoldElectronics;
 public class PowerCalc {
 
     public void powerSum(ApplianceList applianceList, double sum) {
-        for (HouseHoldElectronics i : applianceList.getAs()) {
+        for (HouseHoldElectronic i : applianceList.getAs()) {
             if (i.isOnOff()) {
                 sum = sum + i.getPower();
             }

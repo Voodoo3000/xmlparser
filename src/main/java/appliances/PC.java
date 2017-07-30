@@ -1,11 +1,11 @@
 package appliances;
 
-import electronics.HouseHoldElectronics;
+import electronics.HouseHoldElectronic;
 
 /**
  * Created by Voodoo3000 on 25.07.2017.
  */
-public class PC extends HouseHoldElectronics {
+public class PC extends HouseHoldElectronic {
 
     private int cpuGhz;
     private String gpu;
@@ -13,6 +13,9 @@ public class PC extends HouseHoldElectronics {
     public PC(String modelName, double power, boolean onOff, int cpuGhz, String gpu) {
         this.cpuGhz = cpuGhz;
         this.gpu = gpu;
+        this.setModelName(modelName);
+        this.setPower(power);
+        this.setOnOff(onOff);
     }
 
     @Override

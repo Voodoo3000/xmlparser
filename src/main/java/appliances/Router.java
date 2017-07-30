@@ -1,11 +1,11 @@
 package appliances;
 
-import electronics.HouseHoldElectronics;
+import electronics.HouseHoldElectronic;
 
 /**
  * Created by Voodoo3000 on 25.07.2017.
  */
-public class Router extends HouseHoldElectronics {
+public class Router extends HouseHoldElectronic {
 
     private int linkSpeed;
     private String vlanFeature;
@@ -13,6 +13,9 @@ public class Router extends HouseHoldElectronics {
     public Router(String modelName, double power, boolean onOff, int linkSpeed, String vlanFeature) {
         this.linkSpeed = linkSpeed;
         this.vlanFeature = vlanFeature;
+        this.setModelName(modelName);
+        this.setPower(power);
+        this.setOnOff(onOff);
     }
 
     @Override

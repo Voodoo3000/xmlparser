@@ -1,11 +1,11 @@
 package appliances;
 
-import electronics.HouseHoldElectronics;
+import electronics.HouseHoldElectronic;
 
 /**
  * Created by Voodoo3000 on 25.07.2017.
  */
-public class TV extends HouseHoldElectronics {
+public class TV extends HouseHoldElectronic {
 
     private int diagSize;
     private String dispResol;
@@ -13,6 +13,9 @@ public class TV extends HouseHoldElectronics {
     public TV(String modelName, double power, boolean onOff, int diagSize, String dispResol) {
         this.diagSize = diagSize;
         this.dispResol = dispResol;
+        this.setModelName(modelName);
+        this.setPower(power);
+        this.setOnOff(onOff);
     }
 
     @Override
