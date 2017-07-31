@@ -83,7 +83,7 @@ public class ApplianceSAXParser extends DefaultHandler {
                     this.modelName = String.valueOf(ch, start, length);
                     break;
                 case POWER:
-                    this.power = Integer.parseInt(String.valueOf(ch, start, length));
+                    this.power = Double.parseDouble(String.valueOf(ch, start, length));
                     break;
                 case ONOFF:
                     this.onOff = Boolean.parseBoolean(String.valueOf(ch, start, length));

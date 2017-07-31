@@ -20,4 +20,20 @@ public class ApplianceList {
         return "ApplianceList " +
                 "as = " + as.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ApplianceList appliance = (ApplianceList) o;
+        if(appliance.getAs().equals(appliance.getAs()))
+
+        return as.equals(appliance.as);
+    }
+
+    @Override
+    public int hashCode() {
+        return as.hashCode();
+    }
 }

@@ -27,6 +27,8 @@ public class Runner {
         staxParser.xmlSTAXParsing(XML_DIR);
         System.out.println(staxParser.getAppliance().toString());
 
+        System.out.println("Equals SAX to STAX: " + saxParser.getApplianceList().equals(staxParser.getAppliance()));
+
       /*  ApplianceDOMParser domParser = new ApplianceDOMParser();
         domParser.xmlDOMParsing(XML_DIR);
 */
