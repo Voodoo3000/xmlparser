@@ -22,4 +22,19 @@ public class Fridge extends HouseHoldElectronic {
                 "; consumption power: " + getPower() + "W, " +
                 "on: " + isOnOff() + super.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Fridge fridge = (Fridge) o;
+
+        return capacity == fridge.capacity;
+    }
+
+    @Override
+    public int hashCode() {
+        return capacity;
+    }
 }

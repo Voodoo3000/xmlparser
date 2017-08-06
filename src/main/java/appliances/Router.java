@@ -27,4 +27,22 @@ public class Router extends HouseHoldElectronic {
                 "; consumption power: " + getPower() + "W, " +
                 "on: " + isOnOff() + super.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Router router = (Router) o;
+
+        if (linkSpeed != router.linkSpeed) return false;
+        return vlanFeature.equals(router.vlanFeature);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = linkSpeed;
+        result = 31 * result + vlanFeature.hashCode();
+        return result;
+    }
 }

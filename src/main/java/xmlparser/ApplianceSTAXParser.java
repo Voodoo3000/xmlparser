@@ -51,8 +51,8 @@ public class ApplianceSTAXParser {
     public ApplianceList xmlSTAXParsing(String xmlDir) {
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         try {
-            InputStream inputfile = new FileInputStream(xmlDir);
-            XMLStreamReader reader = inputFactory.createXMLStreamReader(inputfile);
+            InputStream inputFile = new FileInputStream(xmlDir);
+            XMLStreamReader reader = inputFactory.createXMLStreamReader(inputFile);
             process(reader);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -82,14 +82,32 @@ public class ApplianceSTAXParser {
         }
     }
 
+    private void addAppliance(String name) {
+
+        switch (name) {
+            case FRIDGE:
+                this.appliance.getAs().add(new Fridge(modelName, power, onOff, capacity));
+                break;
+            case PC:
+                this.appliance.getAs().add(new PC(modelName, power, onOff, cpuGhz, gpu));
+                break;
+            case ROUTER:
+                this.appliance.getAs().add(new Router(modelName, power, onOff, linkSpeed, vlanFeature));
+                break;
+            case TV:
+                this.appliance.getAs().add(new TV(modelName, power, onOff, diagSize, dispResol));
+                break;
+        }
+    }
+
     private void getField(String element, XMLStreamReader reader) {
-        if (reader.getText().trim().equals("")) {
+        if (!reader.getText().trim().equals("")) {
             switch (element) {
                 case MODELNAME:
                     this.modelName = reader.getText();
                     break;
                 case POWER:
-                    this.power = Integer.parseInt(reader.getText());
+                    this.power = Double.parseDouble(reader.getText());
                     break;
                 case ONOFF:
                     this.onOff = Boolean.parseBoolean(reader.getText());
@@ -115,27 +133,7 @@ public class ApplianceSTAXParser {
                 case DISPRESOL:
                     this.dispResol = reader.getText();
                     break;
-
-
             }
-        }
-    }
-
-    private void addAppliance(String name) {
-
-        switch (name) {
-            case FRIDGE:
-                this.appliance.getAs().add(new Fridge(modelName, power, onOff, capacity));
-                break;
-            case PC:
-                this.appliance.getAs().add(new PC(modelName, power, onOff, cpuGhz, gpu));
-                break;
-            case ROUTER:
-                this.appliance.getAs().add(new Router(modelName, power, onOff, linkSpeed, vlanFeature));
-                break;
-            case TV:
-                this.appliance.getAs().add(new TV(modelName, power, onOff, diagSize, dispResol));
-                break;
         }
     }
 

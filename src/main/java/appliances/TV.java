@@ -27,4 +27,22 @@ public class TV extends HouseHoldElectronic {
                 "; consumption power: " + getPower() + "W, " +
                 "on: " + isOnOff() + super.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TV tv = (TV) o;
+
+        if (diagSize != tv.diagSize) return false;
+        return dispResol.equals(tv.dispResol);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = diagSize;
+        result = 31 * result + dispResol.hashCode();
+        return result;
+    }
 }

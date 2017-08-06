@@ -27,4 +27,22 @@ public class PC extends HouseHoldElectronic {
                 "; consumption power: " + getPower() + "W, " +
                 "on: " + isOnOff() + super.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PC pc = (PC) o;
+
+        if (cpuGhz != pc.cpuGhz) return false;
+        return gpu.equals(pc.gpu);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = cpuGhz;
+        result = 31 * result + gpu.hashCode();
+        return result;
+    }
 }
